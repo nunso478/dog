@@ -5,7 +5,6 @@ import breed from '../views/breed.Vue'
 import breeds from '../views/breeds.Vue'
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
