@@ -22,7 +22,9 @@ export default {
   },
     data(){
     return{
-      resultados:""
+      resultados:"",
+      pesquisa:""
+      
     }
   },
   methods:{

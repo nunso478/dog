@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import breed from '../views/breed.Vue'
-import breeds from '../views/breeds.Vue'
+import breed from '../views/breed.vue'
+import breeds from '../views/breeds.vue'
 
 Vue.use(VueRouter)
-const routes = [
+
+  const routes = [
   {
     path: '/',
     name: 'Home',
