@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <input type="text" v-model="pesquisa">
-      <button @click="carregaInfo">Pesquisar</button>
+     <input type="text" v-model="pesquisa">
+     <button @click="carregaInfo(pesquisa)">Pesquisar</button>
      <div v-for="(item, index) in resultados"
      :key="index">
      <h3>{{item}}</h3>
@@ -11,11 +11,11 @@
      <img :src="item.links[0].href" alt="">
      <p>{{item.data[0].description}}</p> -->
   </div>
+  </div>
 </template>
 <script>
 import axios from "axios"
 export default {
-  
   name: 'HelloWorld',
   props: {
     msg: String
@@ -26,10 +26,9 @@ export default {
     }
   },
   methods:{
-    carregaInfo(){
+    carregaInfo(query){
       //axios.get('https://images-api.nasa.gov/search?q=earth&media_type=image')
-      axios.get('https://dog.ceo/api/breed/'+query+'/images/random')
-      axios.get
+      axios.get('https://dog.ceo/api/breed/'+ query +'/images')
         .then(
           res =>{
             this.resultados = res.data.message //res.data.collection.items
