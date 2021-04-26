@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="breed">
      <div v-for="(item, index) in resultados"
      :key="index">
      <h3>{{item}}</h3>
@@ -9,7 +9,12 @@
 </template>
 <script>
 import axios from "axios"
+import appCard from '@/components/app-card.vue'
 export default {
+  components:{
+    appCard
+     
+  },
     data(){
     return{
       resultados:"",
@@ -38,9 +43,9 @@ export default {
         )
     }
   },
- /* created (){
+ created (){
       this.carregaInfo(this.$route.params.id)
-  }*/
+  }
 }
 </script>
 
@@ -60,5 +65,8 @@ li {
 a {
   color: #42b983;
 }
- 
+.breed{
+  display: flex;
+  flex-flow: row wrap;
+}
 </style>
