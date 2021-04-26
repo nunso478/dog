@@ -1,22 +1,29 @@
 <template>
-  <div class="hello">
+  <div class="breeds">
       <div v-for="(item, index) in resultados" :key="index">
-     <h3>{{index}}</h3>
-     <button @click="navega(index)">{{index}}</button>
+    <app-card largura="200px">
+      <router-link :to='"/breeds/"+item.name'>{{item.name}}</router-link>
+      <button @click="navega(index)">{{index}}</button>
+      <br>
+      <img :src="item.photo" alt="">
+      
+    </app-card>
   </div>
   </div>
 </template>
 <script>
 import axios from "axios"
+import appCard from '@/components/app-card.vue'
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  components:{
+    appCard
+     
   },
     data(){
     return{
       resultados:"",
-      pesquisa:""
+      pesquisa:"",
+      breeds:[]
     }
   },
   methods:{
@@ -30,8 +37,44 @@ export default {
           res =>{
             this.resultados = res.data.message //res.data.collection.items
             console.log(this.resultados);
-            console.log(res);
+          
+            return res.data.message
           }
+        )
+        .then(
+          res => {
+            this.breeds=[...Object.keys(res)]
+            console.log(this.breeds);
+            return [...Object.keys(res)]
+          }
+        )
+        .then(
+          res=>{
+            return axios.all([...res.map(x=>this.carregaBreed(x))]);
+          }
+        )
+        .then(
+          res=>{
+            this.resultados=[]
+            for (let [index,item] of res.entries()) {
+              this.resultados.push(
+                {
+                 'name':this.breeds[index],
+                 'photo':item
+                }
+              )
+            }
+          }
+        )
+
+    },
+     carregaBreed(breed){
+      //axios.get('https://images-api.nasa.gov/search?q=earth&media_type=image')
+     return axios.get('https://dog.ceo/api/breed/'+ breed +'/images/random')
+        .then(
+          res => res.data.message //res.data.collection.items
+         
+          
         )
     }
   },
@@ -56,5 +99,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.breeds{
+  display: flex;
+  flex-flow: row wrap;
 }
 </style>

@@ -1,13 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
+  <appCard cor="lightgreen" >
+<div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>|
       <router-link to="/breeds">breeds</router-link>
     </div>
+
+  </appCard>
+    
     <router-view/>
   </div>
 </template>
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+import appCard from './components/app-card.vue'
+export default {
+  name: 'App',
+  components:{
+    HelloWorld,
+    appCard
+  }
+}
+</script>
 
 <style>
 #app {

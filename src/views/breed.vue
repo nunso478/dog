@@ -10,10 +10,6 @@
 <script>
 import axios from "axios"
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
     data(){
     return{
       resultados:"",
@@ -31,11 +27,20 @@ export default {
             console.log(this.resultados);
           }
         )
+    },
+    carregaBreed(breed){
+      //axios.get('https://images-api.nasa.gov/search?q=earth&media_type=image')
+     return axios.get('https://dog.ceo/api/breed/'+ breed +'/images/random')
+        .then(
+          res => res.data.message //res.data.collection.items
+         
+          
+        )
     }
   },
-  created (){
+ /* created (){
       this.carregaInfo(this.$route.params.id)
-  }
+  }*/
 }
 </script>
 
@@ -55,4 +60,5 @@ li {
 a {
   color: #42b983;
 }
+ 
 </style>
