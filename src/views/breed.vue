@@ -1,11 +1,22 @@
 <template>
+<div style="display: flex">
   <div class="breed">
-     <div v-for="(item, index) in resultados"
-     :key="index">
+     <div v-for="(item, index) in resultados" :key="index">
+
      <h3>{{item}}</h3>
      <img :src="item" alt="">
+     
+    </div>
   </div>
-  </div>
+  <app-card class="favoritos" cor="grey">
+    <p>favoritos</p>
+    <div div v-for="(item, index) in favoritos" :key="index">
+      <app-card cor="white">
+         <img :src="item" width="100" alt="">
+      </app-card>
+    </div>
+  </app-card>
+</div>
 </template>
 <script>
 import axios from "axios"
@@ -14,11 +25,13 @@ export default {
   components:{
     appCard
      
+     
   },
     data(){
     return{
       resultados:"",
-      pesquisa:""
+      pesquisa:"",
+      favoritos:[]
       
     }
   },
@@ -65,8 +78,12 @@ li {
 a {
   color: #42b983;
 }
-.breed{
-  display: flex;
-  flex-flow: row wrap;
+/*.breed{
+ 
+}*/
+.favoritos{
+  width: 250px;
+  font-weight: 700;
+  color: white;
 }
 </style>

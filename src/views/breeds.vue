@@ -1,11 +1,11 @@
 <template>
   <div class="breeds">
       <div v-for="(item, index) in resultados" :key="index">
-    <app-card largura="200px">
+    <app-card largura="100%">
       <router-link :to='"/breeds/"+item.name'>{{item.name}}</router-link>
-      <button @click="navega(index)">{{index}}</button>
+      <button @click="navega(item.name)">{{item.name}}</button>
       <br>
-      <img :src="item.photo" alt="">
+      <img :src="item.photo"  height="50" alt="">
       
     </app-card>
   </div>
