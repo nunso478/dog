@@ -20,6 +20,10 @@ export default {
   components:{
     HelloWorld,
     appCard
+  },
+  mounted(){
+    this.$store.dispatch('carregaInfo')
+    this.$store.dispatch('carregaFavouritos')
   }
 }
 </script>

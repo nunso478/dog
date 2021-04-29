@@ -1,6 +1,6 @@
 <template>
   <div class="breeds">
-      <div v-for="(item, index) in resultados" :key="index">
+      <div v-for="(item, index) in $store.state.info" :key="index">
     <app-card largura="100%">
       <router-link :to='"/breeds/"+item.name'>{{item.name}}</router-link>
       <button @click="navega(item.name)">{{item.name}}</button>
@@ -29,58 +29,11 @@ export default {
   methods:{
     navega(breed){
           this.$router.push('/breeds/'+ breed)
-    },
-    carregaInfo(){
-      //axios.get('https://images-api.nasa.gov/search?q=earth&media_type=image')
-      axios.get('https://dog.ceo/api/breeds/list/all')
-        .then(
-          res =>{
-            this.resultados = res.data.message //res.data.collection.items
-            console.log(this.resultados);
-          
-            return res.data.message
-          }
-        )
-        .then(
-          res => {
-            this.breeds=[...Object.keys(res)]
-            console.log(this.breeds);
-            return [...Object.keys(res)]
-          }
-        )
-        .then(
-          res=>{
-            return axios.all([...res.map(x=>this.carregaBreed(x))]);
-          }
-        )
-        .then(
-          res=>{
-            this.resultados=[]
-            for (let [index,item] of res.entries()) {
-              this.resultados.push(
-                {
-                 'name':this.breeds[index],
-                 'photo':item
-                }
-              )
-            }
-          }
-        )
-
-    },
-     carregaBreed(breed){
-      //axios.get('https://images-api.nasa.gov/search?q=earth&media_type=image')
-     return axios.get('https://dog.ceo/api/breed/'+ breed +'/images/random')
-        .then(
-          res => res.data.message //res.data.collection.items
-         
-          
-        )
-    }
+    },  
   },
-  mounted (){
-    this.carregaInfo();
-  }
+ // mounted (){
+ //   this.carregaInfo();
+ // }
 }
 </script>
 

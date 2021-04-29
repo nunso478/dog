@@ -2,17 +2,20 @@
 <div style="display: flex">
   <div class="breed">
      <div v-for="(item, index) in resultados" :key="index">
-
-     <h3>{{item}}</h3>
+       <app-card largura="520px">
+         {{item}} &emsp;<button @click="marcaFavourito(item)">&#9829;</button>
+         <br /> <br /> 
+      </app-card>
+      
      <img :src="item" alt="">
      
     </div>
   </div>
   <app-card class="favoritos" cor="grey">
     <p>favoritos</p>
-    <div div v-for="(item, index) in favoritos" :key="index">
-      <app-card cor="white">
-         <img :src="item" width="100" alt="">
+    <div div v-for="(item, index) in $store.state.favoritos" :key="index">
+      <app-card cor="white"  >
+         <img :src="item" width="150" alt="" @click="desmarcaFavoritos(index)">
       </app-card>
     </div>
   </app-card>
@@ -21,6 +24,7 @@
 <script>
 import axios from "axios"
 import appCard from '@/components/app-card.vue'
+import { bus } from '../main'
 export default {
   components:{
     appCard
@@ -36,6 +40,14 @@ export default {
     }
   },
   methods:{
+    marcaFavourito(item){
+      //this.favoritos.push(item);
+      this.$store.commit('marcaFavourito',item);
+    },
+    desmarcaFavoritos(index){
+      //this.favoritos.splice(index,1);
+          this.$store.commit('desmarcaFavoritos',index);
+    },
     carregaInfo(query){
       //axios.get('https://images-api.nasa.gov/search?q=earth&media_type=image')
       axios.get('https://dog.ceo/api/breed/'+ query +'/images')
