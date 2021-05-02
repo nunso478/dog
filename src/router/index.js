@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import breed from '../views/breed.vue'
 import breeds from '../views/breeds.vue'
-
+import fav from '../views/fav.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -19,6 +19,10 @@ Vue.use(VueRouter)
   {
     path: '/breeds/:id',
     component: breed
+  },
+  {
+    path: '/fav',
+    component: fav
   },
   {
     path: '/about',

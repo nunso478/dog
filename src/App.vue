@@ -4,7 +4,8 @@
 <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>|
-      <router-link to="/breeds">breeds</router-link>
+      <router-link to="/breeds">breeds</router-link>|
+      <router-link to="/fav">favoritos</router-link>
     </div>
 
   </appCard>
@@ -22,8 +23,8 @@ export default {
     appCard
   },
   mounted(){
-    this.$store.dispatch('carregaInfo')
-    this.$store.dispatch('carregaFavouritos')
+      this.$store.dispatch('carregaInfo')
+      this.$store.dispatch('carregaFavouritos')
   }
 }
 </script>

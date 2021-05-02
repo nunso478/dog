@@ -8,27 +8,27 @@ export default new Vuex.Store({
     info:[],
     favoritos:[],
     venda:[{
-      'nome':'akita',
+      'name':'akita',
       'preco':800,
       'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_dog.jgp'
     },
     {
-      'nome':'husky',
+      'name':'husky',
       'preco':600,
       'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
     },
     {
-      'nome':'husky',
+      'name':'husky',
       'preco':600,
       'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
     },
     {
-      'nome':'husky',
+      'name':'husky',
       'preco':600,
       'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
     },
     {
-      'nome':'boxer',
+      'name':'boxer',
       'preco':600,
       'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
     },
@@ -52,7 +52,7 @@ export default new Vuex.Store({
      }
   },
   actions: {
-    carregaInfo({ commit }){
+    carregaInfo({commit}){
       let resultados=[]
       let breeds = []
       let carregaBreed = (breed)=>{
@@ -125,6 +125,12 @@ export default new Vuex.Store({
   getters:{
     racaVenda: state =>{
       return [...new Set(state.venda.map(x=>x.nome))]
+            .map(res =>{
+              return{
+                      'name': res,
+                      'foto': state.info.find(item => item.name === res).photo
+             } 
+            })
     }
   }
 })
