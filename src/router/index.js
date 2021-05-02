@@ -4,6 +4,12 @@ import Home from '../views/Home.vue'
 import breed from '../views/breed.vue'
 import breeds from '../views/breeds.vue'
 import fav from '../views/fav.vue'
+import registar from '../views/registar.vue'
+import login from '../views/login.vue'
+import admin from '../views/admin.vue'
+
+import store from '../store'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -23,6 +29,26 @@ Vue.use(VueRouter)
   {
     path: '/fav',
     component: fav
+  },
+  {
+    path: '/registar',
+    component: registar
+  },
+  {
+    path: '/login',
+    component: login
+  },
+  {
+    path: '/admin',
+    component: admin,
+    beforeEnter:(to,from,next) =>{
+      if(!store.state.user){
+        next('/login')
+      }
+      else{
+        next()
+      }
+    }
   },
   {
     path: '/about',

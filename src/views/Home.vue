@@ -3,15 +3,16 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <h3>:: :: DESTAQUES</h3>
     <div v-if="$store.state.info.length > 0" class="breeds">
-    <div v-for="(item,index) in $store.getters.racaVenda" :key="index">
-      <app-card largura="200px">
-     <img :src="item.foto" width="90" alt="">
-     <div>{{item.name}}</div>
-      </app-card>
+      <div v-for="(item,index) in $store.getters.racaVenda" :key="index">
+        <app-card largura="200px">
+          <img :src="item.foto" width="90" alt="">
+          <div>{{item.name}}</div>
+        </app-card>
+      </div>
     </div>
-</div>
+  <br>
     <HelloWorld msg="Raças de Cães"/>
-  </div>
+</div>
 </template>
 
 <script>

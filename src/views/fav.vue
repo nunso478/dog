@@ -9,7 +9,7 @@
          <br /> <br /> 
       </app-card>
       
-     <img :src="item" alt="">
+     <img :src="item" width="500" alt="">
      
     </div>
   </div>
@@ -45,9 +45,6 @@ li {
 a {
   color: #42b983;
 }
-/*.breed{
- 
-}*/
 .favoritos{
   width: 250px;
   font-weight: 700;

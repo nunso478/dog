@@ -7,35 +7,13 @@ export default new Vuex.Store({
   state: {
     info:[],
     favoritos:[],
-    venda:[{
-      'name':'akita',
-      'preco':800,
-      'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_dog.jgp'
-    },
-    {
-      'name':'husky',
-      'preco':600,
-      'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
-    },
-    {
-      'name':'husky',
-      'preco':600,
-      'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
-    },
-    {
-      'name':'husky',
-      'preco':600,
-      'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
-    },
-    {
-      'name':'boxer',
-      'preco':600,
-      'foto':'https://images.dog.ceo/breeds/akita/Akita_Inu_in_Riga_1.jgp'
-    },
-  
-  ]
+    venda:[],
+    user:null
   },
   mutations: {
+    setUser(state,user){
+      state.user = user
+    },
      marcaFavourito(state, item){
        state.favoritos = [item,...state.favoritos]
        localStorage.setItem('favoritoLocal',JSON.stringify(state.favoritos))
@@ -49,9 +27,18 @@ export default new Vuex.Store({
      },
      iniciaFavoritos(state,lista){
        state.favoritos = lista
+     },
+     iniciaVenda(state,lista){
+        state.venda = lista
      }
   },
   actions: {
+    carregaVenda({commit}){
+      axios.get('https://dog-vue-58c6c-default-rtdb.firebaseio.com/.json')
+      .then(
+        res => commit('iniciaVenda',res.data)
+      )
+    },
     carregaInfo({commit}){
       let resultados=[]
       let breeds = []
@@ -123,14 +110,14 @@ export default new Vuex.Store({
   
   },
   getters:{
-    racaVenda: state =>{
-      return [...new Set(state.venda.map(x=>x.nome))]
-            .map(res =>{
-              return{
+      racaVenda: state =>{
+        return [...new Set(state.venda.map(x=>x.name))]
+                .map(res =>{
+                    return{
                       'name': res,
                       'foto': state.info.find(item => item.name === res).photo
-             } 
-            })
+                    }  
+                })
     }
   }
 })
